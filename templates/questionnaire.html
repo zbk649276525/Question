@@ -1,0 +1,68 @@
+{% extends 'index.html' %}
+
+{% block con %}
+    <div class="panel panel-body edit">
+        <div class="row add_far">
+            <div class="col-md-3 col-md-offset-9">
+                <button class="btn btn-success add">添加</button>
+                <button class="btn btn-primary save">保存</button>
+            </div>
+        </div>
+        <div class="content">
+            <hr>
+            <ol class="question_list">
+                {% for item in form_list %}
+                    <li>
+                        <div pk="{{ item.obj.id }}" class="pk">
+
+                            <div class="form-group">
+                                <label for="id_caption" class="col-md-2 control-label">问题名称：</label>
+                                <div class="col-md-10">
+                                    {{ item.form.caption }}{{ item.form.errors.caption.0 }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div style="height: 50px;"></div>
+                            <div class="form-group">
+                                <label for="id_tp" class="col-md-2 control-label">问题类型：</label>
+                                <div class="col-md-3 add_btn">
+                                    {{ item.form.tp }}
+                                </div>
+                                <div class="col-md-2">
+                                    <span style="font-size: 20px" class="add_tp">
+                                        <a href="#add_tp" class="{{ item.options_cls }}">✚添加选项</a>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <ul class="choice_list" style="margin-top: 80px;">
+                                {% for v in item.options %}
+                                    <div id="{{ v.obj.id }}">
+                                        <div class="row" style="margin-right: 100px; margin-top: 50px;">
+                                                <label for="id_name" class="col-md-2 control-label">内容：</label>
+                                                <div class="col-md-3">
+                                                {{ v.form.name }}
+                                                </div>
+                                                <label for="id_score" class="col-md-2 control-label">分值：</label>
+                                                <div class="col-md-3">
+                                                    {{ v.form.score }}
+                                                 </div>
+                                                <label class="col_fork">×</label>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            </ul>
+
+                            <span class="fork" style="margin-left: 800px; font-size: 30px; color: gainsboro">
+                                ×
+                            </span>
+
+                        </div>
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+
+{% endblock %}
